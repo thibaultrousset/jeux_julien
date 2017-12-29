@@ -1,16 +1,129 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>HTMLENJS</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  </head>
-  <body>
-    <section id="main">
+<head>
+  <meta charset="utf-8">
+  <title>jeux_carres</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
+<body>
+  <section class="main">
+    <form onsubmit="return false" id="formIntru">
+      <fieldset>
+        <legend>Voulez-vous tester vos reflexes ?</legend>
+        <legend>Choississez un numero entre 3 et 30</legend>
+        <input id="formIntru__nbSquare" type="number" min="3" max="30" name="carres">
+        <legend>Choississez la durée de la partie en secondes</legend>
+        <input id="formIntru__temps" type="number" min="2" max="10" name="temps">
+        <legend>Choississez le nombre de manches</legend>
+        <input id="formIntru__nbManches" type="number" min="1" max="10" name="manches">
+        <input id="message" type="text" name="message" value="">
+        <input id="formIntru__submit" type="submit" value="Go" onclick="launch(); printLog(); affNbCarre(); return false">
+        <span id="msg" style="font-size:25px;" value=""></span>
+        <div id="tab">
 
-    </section>
-    <script src="script.js"type="text/javascript">
+        </div>
+      </fieldset>
+    </form>
 
-    </script>
-  </body>
+    <script type="text/javascript">
+
+    var nbSquare="";
+    var temps="";
+    var nbManches="";
+    document.getElementsByClassName("perdu").addEventListener("click", message2());
+
+
+    function launch(){
+      document.getElementById('message').value="";
+      nbSquare=document.getElementById('formIntru__nbSquare').value;
+      temps=document.getElementById('formIntru__temps').value;
+      nbManches=document.getElementById('formIntru__nbManches').value;
+    }
+
+    function printLog(){
+      console.log("nbSquare : "+nbSquare);
+      console.log("temps : "+temps);
+      console.log("nbManches : "+nbManches);
+    }
+
+
+
+    function affNbCarre(){
+      var container=document.getElementById('tab')
+      container.innerHTML="";
+      var indiceIntru=Math.floor(Math.random()*nbSquare);
+      for (var i = 0; i < nbSquare; i++) {
+        if(i===indiceIntru){
+          carre=document.createElement("button");
+          carre.style.backgroundColor="#0000FF";
+          carre.id="intru";
+          carre.addEventListener("click", message);
+
+
+        }else {
+          carre=document.createElement("button");
+          carre.style.backgroundColor="#FF0000";
+          carre.class="perdu";
+          carre.addEventListener("click", message2);
+        }
+        container.appendChild(carre);
+      }
+
+      function message2(){
+        document.getElementById('message').value="Vous avez perdu";
+        window.clearTimeout(timeout);
+        container.innerHTML="";
+      }
+
+      function message(){
+        document.getElementById('message').value="Vous avez gagné";
+        window.clearTimeout(timeout);
+        container.innerHTML="";
+      }
+
+      function message3(){
+        document.getElementById('message').value="Le temps est ecoulé";
+        document.getElementById('intru').disabled=true;
+        container.innerHTML="";
+      }
+      var timeout = setTimeout(message3, temps*1000);
+    }
+
+    function score(){
+      if (true) {
+
+      } else {
+
+      }
+    }
+
+
+
+    /*var i = -1; // On incremente i en debut de fonction, il vaudra donc 0 a la premiere execution.
+    function extraire()
+    {
+
+    var message = "Cest lundi matin et vu rentres en cours comme chaque semaine \n tu dis bonjour a tes amis"; // Message a afficher, on utilise le caractere \n pour le retour a la ligne.
+
+
+    if( ++i < message.length ){  // On incremente i et on compare a la taille du message.
+    // Si i ne depasse pas le nombre de caracteres dans le message
+    // Note : le premier caractere de la chaine commence a l'index 0
+    if( message[i] == '\n' ){
+    // Si saut de ligne on remplace par l'equivalent HTML : "<br/>".
+    document.getElementById("msg").innerHTML += '<br/>';
+  } else {
+  // Sinon on ajoute simplement le caractere a l'emplacement courant.
+  document.getElementById("msg").innerHTML += message[i];
+}
+} else {
+// Sinon on arrete le timer car le texte a fini de s'afficher.
+clearTimeout(interval);
+}
+
+}*/
+
+</script>
+</body>
 </html>
