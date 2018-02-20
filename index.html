@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <title>jeux_carres</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-</head>
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  --></head>
 <body>
+  <h1 class="titre"></h1>
   <section class="main">
-    <form onsubmit="return false" id="formIntru">
+    <form  id="formIntru">
       <fieldset>
         <legend>Voulez-vous tester vos reflexes ?</legend>
         <legend>Choississez un numero entre 3 et 30</legend>
@@ -18,7 +19,7 @@
         <legend>Choississez le nombre de manches</legend>
         <input id="formIntru__nbManches" type="number" min="1" max="10" name="manches">
         <input id="message" type="text" name="message" value="">
-        <input id="formIntru__submit" type="submit" value="Go" onclick="launch(); printLog(); affNbCarre(); return false">
+        <input id="formIntru__submit" type="submit" value="Go" onclick="launch(); printLog(); affNbCarre(); Timer(); return false">
         <span id="msg" style="font-size:25px;" value=""></span>
         <div id="tab">
 
@@ -27,11 +28,16 @@
     </form>
 
     <script type="text/javascript">
-
+    var container=document.querySelector('#tab');
     var nbSquare="";
     var temps="";
     var nbManches="";
-    document.getElementsByClassName("perdu").addEventListener("click", message2());
+
+
+
+
+  
+
 
 
     function launch(){
@@ -69,12 +75,9 @@
         }
         container.appendChild(carre);
       }
+    }
 
-      function message2(){
-        document.getElementById('message').value="Vous avez perdu";
-        window.clearTimeout(timeout);
-        container.innerHTML="";
-      }
+
 
       function message(){
         document.getElementById('message').value="Vous avez gagné";
@@ -82,22 +85,29 @@
         container.innerHTML="";
       }
 
+      function message2(){
+        document.getElementById('message').value="Vous avez perdu";
+        document.getElementById('intru').disabled=true;
+        container.innerHTML="";
+      }
+      
+
       function message3(){
         document.getElementById('message').value="Le temps est ecoulé";
         document.getElementById('intru').disabled=true;
         container.innerHTML="";
       }
-      var timeout = setTimeout(message3, temps*1000);
-    }
+    
+      function Timer(){
+  temps=temps-1;
+  //document.getElementById('g18Time').value="temps restant : "+g18Time;
+  timeout=setTimeout(Timer, 1000);
 
-    function score(){
-      if (true) {
-
-      } else {
-
-      }
-    }
-
+  if (temps<1) {// end of timer reset time and charge new Q?
+    
+    message3();
+  }
+}
 
 
     /*var i = -1; // On incremente i en debut de fonction, il vaudra donc 0 a la premiere execution.
