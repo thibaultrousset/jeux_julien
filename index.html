@@ -87,6 +87,7 @@
 
       function message2(){
         document.getElementById('message').value="Vous avez perdu";
+         window.clearTimeout(timeout);
         document.getElementById('intru').disabled=true;
         container.innerHTML="";
       }
@@ -100,39 +101,13 @@
     
       function Timer(){
   temps=temps-1;
-  //document.getElementById('g18Time').value="temps restant : "+g18Time;
   timeout=setTimeout(Timer, 1000);
 
-  if (temps<1) {// end of timer reset time and charge new Q?
+  if (temps<1) {// end of timer 
     
     message3();
   }
 }
-
-
-    /*var i = -1; // On incremente i en debut de fonction, il vaudra donc 0 a la premiere execution.
-    function extraire()
-    {
-
-    var message = "Cest lundi matin et vu rentres en cours comme chaque semaine \n tu dis bonjour a tes amis"; // Message a afficher, on utilise le caractere \n pour le retour a la ligne.
-
-
-    if( ++i < message.length ){  // On incremente i et on compare a la taille du message.
-    // Si i ne depasse pas le nombre de caracteres dans le message
-    // Note : le premier caractere de la chaine commence a l'index 0
-    if( message[i] == '\n' ){
-    // Si saut de ligne on remplace par l'equivalent HTML : "<br/>".
-    document.getElementById("msg").innerHTML += '<br/>';
-  } else {
-  // Sinon on ajoute simplement le caractere a l'emplacement courant.
-  document.getElementById("msg").innerHTML += message[i];
-}
-} else {
-// Sinon on arrete le timer car le texte a fini de s'afficher.
-clearTimeout(interval);
-}
-
-}*/
 
 </script>
 </body>
