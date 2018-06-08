@@ -19,7 +19,7 @@
         <legend>Choississez le nombre de manches</legend>
         <input id="formIntru__nbManches" type="number" min="1" max="10" name="manches">
         <input id="message" type="text" name="message" value="">
-        <input id="formIntru__submit" type="submit" value="Go" onclick="launch(); printLog(); affNbCarre(); Timer(); return false">
+        <input id="formIntru__submit" type="submit" value="Go" onclick="launch(); printLog(); affNbCarre(); return false">
         <span id="msg" style="font-size:25px;" value=""></span>
         <div id="tab">
 
@@ -45,6 +45,7 @@
       nbSquare=document.getElementById('formIntru__nbSquare').value;
       temps=document.getElementById('formIntru__temps').value;
       nbManches=document.getElementById('formIntru__nbManches').value;
+      Timer();
     }
 
     function printLog(){
